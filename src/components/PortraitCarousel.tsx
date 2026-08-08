@@ -66,6 +66,8 @@ export function PortraitCarousel({
       return;
     }
 
+    let badgeCleanup: (() => void) | undefined;
+
     const ctx = gsap.context(() => {
       gsap.from(".pk-stage-bloom", {
         opacity: 0,
@@ -112,110 +114,138 @@ export function PortraitCarousel({
       });
 
       if (badgeEl) {
-        const words = badgeEl.querySelectorAll(".pk-badge-word");
+        const floatTween = gsap.to(badgeEl, {
+          y: -2.5,
+          duration: 2.8,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+          delay: 1.5,
+        });
 
-        gsap.set(badgeEl, { opacity: 0, y: -14, scale: 0.92 });
-        gsap.set(words, { opacity: 0, y: 8 });
-        gsap.set(".pk-badge-star", { opacity: 0, scale: 0.6, rotate: -20 });
-        gsap.set(".pk-badge-ping", { scale: 0.92, opacity: 0 });
-
-        const badgeIntro = gsap.timeline({ delay: 0.45 });
-
-        badgeIntro
-          .to(badgeEl, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.85,
-            ease: "power3.out",
-          })
-          .to(
-            ".pk-badge-star",
-            {
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
-              duration: 0.55,
-              ease: "back.out(2)",
-            },
-            "-=0.55"
-          )
-          .to(
-            words,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.45,
-              stagger: 0.07,
-              ease: "power2.out",
-            },
-            "-=0.4"
-          )
-          .fromTo(
-            ".pk-badge-shimmer",
-            { xPercent: -130 },
-            { xPercent: 220, duration: 1.2, ease: "power2.inOut" },
-            "-=0.2"
-          );
+        gsap.set(badgeEl, { opacity: 0, y: -10, scale: 0.97 });
+        gsap.set(".pk-badge-star", { opacity: 0.75, scale: 0.9 });
 
         gsap.to(badgeEl, {
-          y: -3,
-          duration: 2.6,
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.5,
+        });
+
+        gsap.to(".pk-badge-star", {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          delay: 0.7,
+        });
+
+        gsap.to(".pk-badge-star", {
+          scale: 1.12,
+          rotate: 8,
+          duration: 1.6,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
           delay: 1.6,
         });
 
-        gsap.to(".pk-badge-star", {
-          scale: 1.18,
-          rotate: 12,
-          duration: 1.4,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: 1.7,
-        });
-
-        gsap
-          .timeline({ repeat: -1, repeatDelay: 2.4, delay: 2 })
-          .fromTo(
+        const shimmer = () => {
+          gsap.fromTo(
             ".pk-badge-shimmer",
-            { xPercent: -130 },
-            { xPercent: 220, duration: 1.35, ease: "power1.inOut" }
+            { xPercent: -120 },
+            { xPercent: 220, duration: 1.25, ease: "power1.inOut" }
           );
+        };
 
-        gsap.to(".pk-badge-glow", {
-          opacity: 0.75,
-          duration: 1.8,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: 1.3,
-        });
+        gsap.delayedCall(1.8, shimmer);
+        const shimmerLoop = window.setInterval(shimmer, 4800);
 
-        gsap.fromTo(
-          ".pk-badge-ping",
-          { scale: 1, opacity: 0.55 },
-          {
-            scale: 1.32,
-            opacity: 0,
-            duration: 2.1,
-            ease: "power1.out",
-            repeat: -1,
-            delay: 1.5,
-          }
-        );
+        const onMove = (e: MouseEvent) => {
+          const rect = badgeEl.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(badgeEl, {
+            rotateY: px * 14,
+            rotateX: -py * 10,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        };
 
-        gsap.to(badgeEl, {
-          boxShadow:
-            "0 6px 22px oklch(0.58 0.15 55 / 0.28), 0 0 0 1px oklch(0.72 0.11 75 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.45)",
-          duration: 1.9,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: 1.5,
-        });
+        const onLeave = () => {
+          gsap.to(badgeEl, {
+            rotateX: 0,
+            rotateY: 0,
+            scale: 1,
+            duration: 0.45,
+            ease: "power3.out",
+          });
+          floatTween.resume();
+        };
+
+        const onEnter = () => {
+          floatTween.pause();
+          gsap.to(badgeEl, { scale: 1.04, duration: 0.3, ease: "power2.out" });
+          shimmer();
+          gsap.to(".pk-badge-star", {
+            rotate: "+=180",
+            duration: 0.55,
+            ease: "power2.out",
+          });
+        };
+
+        const burstSparks = () => {
+          const sparks = badgeEl.querySelectorAll(".pk-badge-spark");
+          sparks.forEach((spark, i) => {
+            const angle = (i / sparks.length) * Math.PI * 2;
+            gsap.fromTo(
+              spark,
+              { opacity: 1, x: 0, y: 0, scale: 1 },
+              {
+                opacity: 0,
+                x: Math.cos(angle) * 22,
+                y: Math.sin(angle) * 14,
+                scale: 0.2,
+                duration: 0.55,
+                ease: "power2.out",
+              }
+            );
+          });
+        };
+
+        const onClick = () => {
+          gsap.fromTo(
+            badgeEl,
+            { scale: 0.96 },
+            {
+              scale: 1.05,
+              duration: 0.2,
+              yoyo: true,
+              repeat: 1,
+              ease: "power2.out",
+            }
+          );
+          shimmer();
+          burstSparks();
+        };
+
+        badgeEl.addEventListener("mousemove", onMove);
+        badgeEl.addEventListener("mouseenter", onEnter);
+        badgeEl.addEventListener("mouseleave", onLeave);
+        badgeEl.addEventListener("click", onClick);
+
+        badgeCleanup = () => {
+          window.clearInterval(shimmerLoop);
+          badgeEl.removeEventListener("mousemove", onMove);
+          badgeEl.removeEventListener("mouseenter", onEnter);
+          badgeEl.removeEventListener("mouseleave", onLeave);
+          badgeEl.removeEventListener("click", onClick);
+        };
       }
 
       gsap.to(".pk-stage-ring--spin", {
@@ -261,7 +291,10 @@ export function PortraitCarousel({
       });
     }, rightRef);
 
-    return () => ctx.revert();
+    return () => {
+      badgeCleanup?.();
+      ctx.revert();
+    };
   }, []);
 
   useEffect(() => {
@@ -290,19 +323,23 @@ export function PortraitCarousel({
       onMouseLeave={() => setPaused(false)}
     >
       <div className="pk-badge-wrap">
-        <span className="pk-badge-ping" aria-hidden />
-        <div ref={badgeRef} className="pk-badge">
-          <span className="pk-badge-glow" aria-hidden />
+        <div
+          ref={badgeRef}
+          className="pk-badge"
+          role="button"
+          tabIndex={0}
+          aria-label={badge}
+        >
           <span className="pk-badge-shimmer" aria-hidden />
+          {/* <span className="pk-badge-live" aria-hidden /> */}
           <IconSparkles size={12} className="pk-badge-star" stroke={1.5} />
-          <span className="pk-badge-text">
-            {badge.split(" ").map((word, i, arr) => (
-              <span key={`${word}-${i}`} className="pk-badge-word">
-                {word}
-                {i < arr.length - 1 ? "\u00A0" : ""}
-              </span>
-            ))}
-          </span>
+          <span className="pk-badge-text">{badge}</span>
+          <span className="pk-badge-spark" aria-hidden />
+          <span className="pk-badge-spark" aria-hidden />
+          <span className="pk-badge-spark" aria-hidden />
+          <span className="pk-badge-spark" aria-hidden />
+          <span className="pk-badge-spark" aria-hidden />
+          <span className="pk-badge-spark" aria-hidden />
         </div>
       </div>
 
