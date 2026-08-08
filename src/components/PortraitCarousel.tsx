@@ -25,6 +25,7 @@ export function PortraitCarousel({
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const rightRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const idxRef = useRef(0);
@@ -54,7 +55,7 @@ export function PortraitCarousel({
   useEffect(() => {
     const stage = stageRef.current;
     const badgeEl = badgeRef.current;
-    if (!stage) return;
+    if (!stage || !rightRef.current) return;
 
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -111,49 +112,109 @@ export function PortraitCarousel({
       });
 
       if (badgeEl) {
-        gsap.set(badgeEl, { opacity: 0, y: -10, scale: 0.96 });
-        gsap.to(badgeEl, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 0.5,
-        });
+        const words = badgeEl.querySelectorAll(".pk-badge-word");
+
+        gsap.set(badgeEl, { opacity: 0, y: -14, scale: 0.92 });
+        gsap.set(words, { opacity: 0, y: 8 });
+        gsap.set(".pk-badge-star", { opacity: 0, scale: 0.6, rotate: -20 });
+        gsap.set(".pk-badge-ping", { scale: 0.92, opacity: 0 });
+
+        const badgeIntro = gsap.timeline({ delay: 0.45 });
+
+        badgeIntro
+          .to(badgeEl, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: "power3.out",
+          })
+          .to(
+            ".pk-badge-star",
+            {
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+              duration: 0.55,
+              ease: "back.out(2)",
+            },
+            "-=0.55"
+          )
+          .to(
+            words,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.07,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .fromTo(
+            ".pk-badge-shimmer",
+            { xPercent: -130 },
+            { xPercent: 220, duration: 1.2, ease: "power2.inOut" },
+            "-=0.2"
+          );
 
         gsap.to(badgeEl, {
-          y: -2,
-          duration: 2.8,
+          y: -3,
+          duration: 2.6,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
-          delay: 1.4,
+          delay: 1.6,
+        });
+
+        gsap.to(".pk-badge-star", {
+          scale: 1.18,
+          rotate: 12,
+          duration: 1.4,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+          delay: 1.7,
         });
 
         gsap
-          .timeline({ repeat: -1, repeatDelay: 3.2, delay: 1.8 })
+          .timeline({ repeat: -1, repeatDelay: 2.4, delay: 2 })
           .fromTo(
             ".pk-badge-shimmer",
-            { xPercent: -120 },
-            { xPercent: 220, duration: 1.5, ease: "power1.inOut" }
+            { xPercent: -130 },
+            { xPercent: 220, duration: 1.35, ease: "power1.inOut" }
           );
 
-        gsap.to(".pk-badge-star", {
-          scale: 1.12,
-          duration: 1.6,
+        gsap.to(".pk-badge-glow", {
+          opacity: 0.75,
+          duration: 1.8,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+          delay: 1.3,
+        });
+
+        gsap.fromTo(
+          ".pk-badge-ping",
+          { scale: 1, opacity: 0.55 },
+          {
+            scale: 1.32,
+            opacity: 0,
+            duration: 2.1,
+            ease: "power1.out",
+            repeat: -1,
+            delay: 1.5,
+          }
+        );
+
+        gsap.to(badgeEl, {
+          boxShadow:
+            "0 6px 22px oklch(0.58 0.15 55 / 0.28), 0 0 0 1px oklch(0.72 0.11 75 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.45)",
+          duration: 1.9,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
           delay: 1.5,
-        });
-
-        gsap.to(".pk-badge-glow", {
-          opacity: 0.55,
-          duration: 2.2,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: 1.2,
         });
       }
 
@@ -198,7 +259,7 @@ export function PortraitCarousel({
         repeat: -1,
         yoyo: true,
       });
-    }, stageRef);
+    }, rightRef);
 
     return () => ctx.revert();
   }, []);
@@ -223,15 +284,26 @@ export function PortraitCarousel({
 
   return (
     <div
+      ref={rightRef}
       className="pk-right"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div ref={badgeRef} className="pk-badge">
-        <span className="pk-badge-glow" aria-hidden />
-        <span className="pk-badge-shimmer" aria-hidden />
-        <IconSparkles size={12} className="pk-badge-star" stroke={1.5} />
-        <span className="pk-badge-text">{badge}</span>
+      <div className="pk-badge-wrap">
+        <span className="pk-badge-ping" aria-hidden />
+        <div ref={badgeRef} className="pk-badge">
+          <span className="pk-badge-glow" aria-hidden />
+          <span className="pk-badge-shimmer" aria-hidden />
+          <IconSparkles size={12} className="pk-badge-star" stroke={1.5} />
+          <span className="pk-badge-text">
+            {badge.split(" ").map((word, i, arr) => (
+              <span key={`${word}-${i}`} className="pk-badge-word">
+                {word}
+                {i < arr.length - 1 ? "\u00A0" : ""}
+              </span>
+            ))}
+          </span>
+        </div>
       </div>
 
       <div ref={stageRef} className="pk-stage">

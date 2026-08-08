@@ -208,34 +208,57 @@ button {
 /* ─────────────────────────────────────────────
    Badge / portrait
    ───────────────────────────────────────────── */
-.pk-badge {
+.pk-badge-wrap {
   position: absolute;
   top: 18px;
   right: 18px;
   z-index: 6;
   display: inline-flex;
+  max-width: calc(100% - 28px);
+}
+
+.pk-badge-ping {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--pk-radius-badge);
+  border: 1.5px solid oklch(0.58 0.15 55 / 0.55);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+}
+
+.pk-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 6px;
-  max-width: calc(100% - 28px);
-  padding: 6px 14px;
-  border: 1px solid var(--pk-accent-border);
+  gap: 7px;
+  max-width: 100%;
+  padding: 7px 15px;
+  border: 1px solid oklch(0.58 0.15 55 / 0.55);
   border-radius: var(--pk-radius-badge);
-  background: var(--pk-cream-soft);
+  background: linear-gradient(
+    120deg,
+    oklch(0.98 0.015 70 / 0.95) 0%,
+    oklch(0.95 0.03 60 / 0.92) 55%,
+    oklch(0.97 0.02 75 / 0.95) 100%
+  );
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   color: var(--pk-fg-soft);
   white-space: nowrap;
   line-height: 1.2;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
   isolation: isolate;
   box-shadow:
-    0 4px 16px oklch(0.3 0.11 20 / 0.08),
-    inset 0 1px 0 oklch(1 0 0 / 0.4);
-  will-change: transform, opacity;
+    0 6px 18px oklch(0.3 0.11 20 / 0.12),
+    0 0 0 1px oklch(0.72 0.11 75 / 0.2),
+    inset 0 1px 0 oklch(1 0 0 / 0.5);
+  will-change: transform, opacity, box-shadow;
   transform: translateZ(0);
 }
 
@@ -245,15 +268,21 @@ button {
   color: var(--pk-accent);
   flex: 0 0 auto;
   display: block;
+  filter: drop-shadow(0 0 5px oklch(0.58 0.15 55 / 0.55));
 }
 
 .pk-badge-text {
   position: relative;
   z-index: 2;
-  display: block;
+  display: inline-flex;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pk-badge-word {
+  display: inline-block;
+  will-change: transform, opacity;
 }
 
 .pk-badge-shimmer {
@@ -261,18 +290,18 @@ button {
   top: 0;
   left: 0;
   z-index: 1;
-  width: 45%;
+  width: 48%;
   height: 100%;
   background: linear-gradient(
     105deg,
     transparent 0%,
-    oklch(1 0.02 75 / 0.15) 35%,
-    oklch(0.92 0.08 75 / 0.45) 50%,
-    oklch(1 0.02 75 / 0.15) 65%,
+    oklch(1 0.03 75 / 0.2) 35%,
+    oklch(0.9 0.1 75 / 0.55) 50%,
+    oklch(1 0.03 75 / 0.2) 65%,
     transparent 100%
   );
   pointer-events: none;
-  transform: skewX(-16deg) translateX(-120%);
+  transform: skewX(-16deg) translateX(-130%);
   will-change: transform;
 }
 
@@ -282,12 +311,19 @@ button {
   z-index: 0;
   border-radius: inherit;
   pointer-events: none;
-  opacity: 0.2;
-  background: radial-gradient(
-    120% 80% at 20% 50%,
-    oklch(0.72 0.11 75 / 0.28) 0%,
-    transparent 55%
-  );
+  opacity: 0.28;
+  background:
+    radial-gradient(
+      120% 90% at 15% 50%,
+      oklch(0.72 0.11 75 / 0.4) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      90deg,
+      oklch(0.58 0.15 55 / 0.08),
+      transparent 40%,
+      oklch(0.72 0.11 75 / 0.12)
+    );
 }
 
 /* Stage portrait carousel */
@@ -1364,11 +1400,14 @@ button {
     justify-content: flex-start !important;
   }
 
-  .pk-badge {
+  .pk-badge-wrap {
     top: 12px !important;
     right: 12px !important;
+  }
+
+  .pk-badge {
     font-size: 10px !important;
-    padding: 5px 10px !important;
+    padding: 5px 11px !important;
   }
 
   .pk-dock {
@@ -1461,7 +1500,8 @@ button {
     transition: none !important;
   }
 
-  .pk-badge-shimmer {
+  .pk-badge-shimmer,
+  .pk-badge-ping {
     display: none !important;
   }
 
