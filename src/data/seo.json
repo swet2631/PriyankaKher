@@ -1,0 +1,33 @@
+{
+  "siteUrl": "https://priyankakher.com",
+  "title": "Priyanka Kher — Singer, Songwriter & Performer from Gujarat | Arriving Soon",
+  "titleTemplate": "%s | Priyanka Kher",
+  "description": "Priyanka Kher — singer, songwriter, performer and composer from Gujarat — is unveiling her official world soon. Discover her originals and follow her journey.",
+  "keywords": [
+    "Priyanka Kher",
+    "Gujarat singer",
+    "Gujarati music",
+    "songwriter",
+    "performer",
+    "composer",
+    "Priyanka Kher originals",
+    "Rahdo",
+    "Dev Dwarikavala"
+  ],
+  "og": {
+    "type": "website",
+    "title": "Priyanka Kher — The Melody Queen Who Rules Every Stage",
+    "description": "Singer, songwriter, performer & composer from Gujarat. Her official world is almost ready to unfold.",
+    "image": "/uploads/IMG_4279.PNG",
+    "locale": "en_IN"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Priyanka Kher — The Melody Queen Who Rules Every Stage",
+    "description": "Singer, songwriter, performer & composer from Gujarat. Her official world is almost ready to unfold."
+  },
+  "robots": {
+    "index": true,
+    "follow": true
+  }
+}

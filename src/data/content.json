@@ -1,0 +1,103 @@
+{
+  "artist": {
+    "name": "Priyanka Kher",
+    "tagline": "Gujarat's Voice, About to Rise",
+    "badge": "A New Era, Almost Here",
+    "roles": "Singer, Songwriter, Performer & Composer",
+    "location": "Gujarat, India",
+    "email": "priyankakherteam@gmail.com"
+  },
+  "quotes": [
+    "The Melody Queen, Who Rules Every Stage"
+  ],
+  "portraits": [
+    {
+      "src": "/uploads/IMG_4276.PNG",
+      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "objectPosition": "top center"
+    },
+    {
+      "src": "/uploads/IMG_4278.PNG",
+      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "objectPosition": "top center"
+    },
+    {
+      "src": "/uploads/IMG_4279.PNG",
+      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "objectPosition": "top center"
+    }
+  ],
+  "ogImage": "/uploads/IMG_4279.PNG",
+  "actions": {
+    "primary": {
+      "label": "Press Play on the Journey",
+      "href": "https://www.youtube.com/@priyankakher"
+    },
+    "secondary": {
+      "label": "Send an Inquiry",
+      "email": "priyankakherteam@gmail.com",
+      "subject": "Event Inquiry for Priyanka Kher",
+      "body": "Hello Team Priyanka Kher,\n\nI came across your site and I'd like to connect regarding an event inquiry:\n\nMy Name:\nOrganization/Event:\nDate & Location:\n\nPlease let us know if this date is available.\n\nThank you!"
+    }
+  },
+  "originals": {
+    "heading": "Priyanka Kher Originals",
+    "viewAll": {
+      "label": "View All",
+      "href": "https://www.youtube.com/@priyankakher"
+    },
+    "items": [
+      { "title": "Rahdo", "id": "h5k_JZ0FFIQ" },
+      { "title": "Dev Dwarikavala", "id": "Y8vaFw8I7kE" },
+      { "title": "Beni Baa", "id": "dwvWVIx7FCU" },
+      { "title": "Avsariyo", "id": "V6nPl9iuiZE" },
+      { "title": "Idariyo", "id": "XP43Ccr2X-Q" },
+      { "title": "Pitaliya Paava Vaagya", "id": "EaRuns54gYs" }
+    ]
+  },
+  "socials": {
+    "heading": "The Sound Spreads Here",
+    "links": [
+      {
+        "id": "spotify",
+        "label": "Spotify",
+        "href": "https://open.spotify.com/artist/5UpLqPRU9ZHDbo7ntxSD6z"
+      },
+      {
+        "id": "youtube-music",
+        "label": "YouTube Music",
+        "href": "https://music.youtube.com/channel/UCZ_VQm_Q-uHBL4jhySQllXg"
+      },
+      {
+        "id": "youtube",
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@priyankakher"
+      },
+      {
+        "id": "instagram",
+        "label": "Instagram",
+        "href": "https://www.instagram.com/priyankakhermusic"
+      },
+      {
+        "id": "facebook",
+        "label": "Facebook",
+        "href": "https://www.facebook.com/priyankakhermusic/"
+      }
+    ]
+  },
+  "stageBar": {
+    "eyebrow": "Now on stage",
+    "shuffleLabel": "Pick for Me",
+    "messageLabel": "Your Fav Song?",
+    "listenLabel": "Garba Mode",
+    "messageHref": "https://ig.me/m/priyankakhermusic?text=Hello%20Melody%20Queen!%20I%20came%20across%20your%20site%20and%20would%20love%20to%20say%20%E2%80%94%20my%20favorite%20song%20of%20yours%20is%3A%20",
+    "listenHref": "https://www.youtube.com/watch?v=JuQpTfDZ2gw&list=PL0kHUqTKdRPgdDAK9MpAML-906bI8LTKb"
+  },
+  "sameAs": [
+    "https://www.youtube.com/@priyankakher",
+    "https://www.instagram.com/priyankakhermusic",
+    "https://www.facebook.com/priyankakhermusic/",
+    "https://music.youtube.com/channel/UCZ_VQm_Q-uHBL4jhySQllXg",
+    "https://open.spotify.com/artist/5UpLqPRU9ZHDbo7ntxSD6z"
+  ]
+}
