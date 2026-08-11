@@ -53,7 +53,7 @@ export const metadata: Metadata = {
         url: seo.og.image,
         width: 1200,
         height: 1200,
-        alt: "Priyanka Kher — singer, songwriter and performer from Gujarat",
+        alt: "Priyanka Kher — singer, songwriter and performer from Gujarat, India",
       },
     ],
   },

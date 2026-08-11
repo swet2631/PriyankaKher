@@ -40,6 +40,7 @@ type Content = {
     messageLabel: string;
     listenLabel: string;
     messageHref: string;
+    messageText: string;
     listenHref: string;
   };
 };

@@ -1,7 +1,7 @@
 {
   "artist": {
     "name": "Priyanka Kher",
-    "tagline": "Gujarat's Voice, About to Rise",
+    "tagline": "India's Voice, About to Rise",
     "badge": "A New Era, Almost Here",
     "roles": "Singer, Songwriter, Performer & Composer",
     "location": "Gujarat, India",
@@ -12,22 +12,32 @@
   ],
   "portraits": [
     {
-      "src": "/uploads/IMG_4276.PNG",
-      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "src": "/uploads/priyankakher-official-portrait.png",
+      "alt": "Priyanka Kher — official studio portrait, Indian singer and songwriter",
       "objectPosition": "top center"
     },
     {
-      "src": "/uploads/IMG_4278.PNG",
-      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "src": "/uploads/priyankakher-singer-portrait.png",
+      "alt": "Priyanka Kher — singer and performer studio portrait",
       "objectPosition": "top center"
     },
     {
-      "src": "/uploads/IMG_4279.PNG",
-      "alt": "Priyanka Kher — singer, songwriter and performer from Gujarat",
+      "src": "/uploads/priyankakher-music-portrait.png",
+      "alt": "Priyanka Kher — music artist portrait from Gujarat, India",
       "objectPosition": "top center"
+    },
+    {
+      "src": "/uploads/priyankakher-artist-portrait.png",
+      "alt": "Priyanka Kher — artist and songwriter portrait",
+      "objectPosition": "top center"
+    },
+    {
+      "src": "/uploads/priyankakher-performer-portrait.png",
+      "alt": "Priyanka Kher — stage performer and composer portrait",
+      "objectPosition": "center center"
     }
   ],
-  "ogImage": "/uploads/IMG_4279.PNG",
+  "ogImage": "/uploads/priyankakher.png",
   "actions": {
     "primary": {
       "label": "Press Play on the Journey",
@@ -48,11 +58,13 @@
     },
     "items": [
       { "title": "Rahdo", "id": "h5k_JZ0FFIQ" },
-      { "title": "Dev Dwarikavala", "id": "Y8vaFw8I7kE" },
+      { "title": "Har Woh Shaam", "id": "vSuQrP1hHSQ" },
       { "title": "Beni Baa", "id": "dwvWVIx7FCU" },
       { "title": "Avsariyo", "id": "V6nPl9iuiZE" },
       { "title": "Idariyo", "id": "XP43Ccr2X-Q" },
-      { "title": "Pitaliya Paava Vaagya", "id": "EaRuns54gYs" }
+      { "title": "Agan Aek Bala", "id": "QbxwL-lZTQs" },
+      { "title": "Pitaliya Paava Vaagya", "id": "EaRuns54gYs" },
+      { "title": "Dev Dwarikavala", "id": "Y8vaFw8I7kE" }
     ]
   },
   "socials": {
@@ -90,7 +102,8 @@
     "shuffleLabel": "Pick for Me",
     "messageLabel": "Your Fav Song?",
     "listenLabel": "Garba Mode",
-    "messageHref": "https://ig.me/m/priyankakhermusic?text=Hello%20Melody%20Queen!%20I%20came%20across%20your%20site%20and%20would%20love%20to%20say%20%E2%80%94%20my%20favorite%20song%20of%20yours%20is%3A%20",
+    "messageHref": "https://ig.me/m/priyankakhermusic",
+    "messageText": "Hello Melody Queen! I came across your site and would love to say — my favorite song of yours is: ",
     "listenHref": "https://www.youtube.com/watch?v=JuQpTfDZ2gw&list=PL0kHUqTKdRPgdDAK9MpAML-906bI8LTKb"
   },
   "sameAs": [
